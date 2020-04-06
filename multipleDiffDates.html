@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>diff dates</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    
+</head>
+
+<body>
+    <h1 id="date"></h1>
+    <script>
+        let output, opt = [], obj={year:0,month:0,day:0,hour:0,min:0,sec:0};
+
+        function multipleDiffDates(array) {
+            debugger;
+            for (items in array) {
+                let d1 = array[items].start
+                let d2 = array[items].end
+                output = dateDifference(d1, d2);
+                opt.push(output)
+                if (opt.length > 1) {
+                    for (let index = 0; index < opt.length; index++) {
+                        obj.year = opt[index].year + obj.year  
+                        obj.month =opt[index].month+ obj.month
+                        obj.day =opt[index].day+ obj.day
+                        obj.hour =opt[index].hour+ obj.hour
+                        obj.min =opt[index].min+ obj.min
+                        obj.sec =opt[index].sec+ obj.sec                     
+                    }
+
+                }
+            }
+            let result = JSON.stringify(obj)
+            document.getElementById("date").innerHTML = result;
+        }
+
+        function dateDifference(dateOne, dateTwo) {
+            let year = Math.abs(dateOne.getFullYear() - dateTwo.getFullYear())
+            let month = Math.abs((dateOne.getMonth() - dateTwo.getMonth()))
+            let day = Math.abs(dateOne.getDate() - dateTwo.getDate())
+            let hour = Math.abs(dateOne.getHours() - dateTwo.getHours())
+            let min = Math.abs(dateOne.getMinutes() - dateTwo.getMinutes())
+            let sec = Math.abs(dateOne.getSeconds() - dateTwo.getSeconds())
+            return {
+                year,
+                month,
+                day,
+                hour,
+                min,
+                sec
+            };
+        }
+
+
+
+
+        let arr = [{
+            start: new Date('2021-08-01T12:22'),
+            end: new Date('2020-02-20T23:19')
+        }, {
+            start: new Date("1996-06-11T03:30"),
+            end: new Date("1997-06-11T03:30")
+        }]
+        multipleDiffDates(arr);
+    </script>
+</body>
+
+</html>

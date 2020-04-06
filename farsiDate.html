@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>farsi date</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="https://unpkg.com/jalali-moment/dist/jalali-moment.browser.js"></script>
+
+</head>
+
+<body>
+    <h1 id="datetime"></h1>
+    <input type="button" name="run" onclick="myTimer()" value="click here">
+
+    <script>
+        function myTimer() {
+            const m = moment();
+            let date = m.locale('fa').format('ddd') + ' ' + m.locale('fa').format('DD MMM YYYY');
+            let final = toPersianNum(date);
+            document.getElementById("datetime").innerHTML = final
+        }
+
+
+
+
+
+
+        function toPersianNum(num, dontTrim) {
+
+            var i = 0,
+
+                dontTrim = dontTrim || false,
+
+                num = dontTrim ? num.toString() : num.toString().trim(),
+                len = num.length,
+
+                res = '',
+                pos,
+
+                persianNumbers = typeof persianNumber == 'undefined' ? ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸',
+                    '۹'] :
+                persianNumbers;
+
+            for (; i < len; i++)
+                if ((pos = persianNumbers[num.charAt(i)]))
+                    res += pos;
+                else
+                    res += num.charAt(i);
+
+            return res;
+        }
+    </script>
+</body>
+
+</html>

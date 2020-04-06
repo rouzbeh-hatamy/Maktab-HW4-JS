@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>date difference</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1 id="date"></h1>
+        <script>
+            function dateDifference(dateOne,dateTwo){
+    let year = Math.abs(dateOne.getFullYear()-dateTwo.getFullYear())
+    let month = Math.abs((dateOne.getMonth()- dateTwo.getMonth()))
+    let day = Math.abs(dateOne.getDate() - dateTwo.getDate())
+    let hour= Math.abs(dateOne.getHours()- dateTwo.getHours())
+    let min = Math.abs(dateOne.getMinutes() - dateTwo.getMinutes())
+    let sec = Math.abs(dateOne.getSeconds() - dateTwo.getSeconds())
+    return "year = "+ year +" month = " +month +" day = " +day + " hour = "+ hour +" min = "+  min +" sec = "+ sec;
+}
+let date1 = new Date('2020-08-01T12:22:41');
+let date2 = new Date("2020-02-20T23:19:01");
+let output = dateDifference(date1,date2);
+let d = document.getElementById("date").innerHTML = output;
+        </script>
+    </body>
+</html>

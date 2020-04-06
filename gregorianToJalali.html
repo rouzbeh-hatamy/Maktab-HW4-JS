@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>convert date</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <!--cdn-->
+    <script src="https://unpkg.com/jalali-moment/dist/jalali-moment.browser.js"></script>
+    <style>
+        body {
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            margin: 10px 0 50px;
+            color: #aaa;
+        }
+
+        a {
+            color: #07f;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            padding: 15px;
+            text-align: center;
+        }
+
+        span {
+            color: #07f;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>تبدیل تاریخ <span>میلادی</span> به <span>شمسی</span></h1>
+    <input id="gregorianInput" placeHolder="YYYY/MM/D" value="1996/06/11">
+    <button id="convertToJalali">convert</button><br /><br />
+    <span id="jalaliOutput"></span>
+
+    <h1>تبدیل تاریخ <span>شمسی</span> به <span>میلادی</span> </h1>
+    <input id="jalaliInput" placeHolder="YYYY/M/D" value="1375/03/22">
+    <button id="convertToGregorian">convert</button><br /><br />
+    <span id="gregorianOutput"></span>
+
+    <script>
+        // Code goes here
+        document.getElementById("convertToJalali").addEventListener("click", function () {
+            var output = "";
+            try {
+                var input = document.getElementById("gregorianInput").value;
+                var m = moment(input);
+                if (m.isValid()) {
+                    m.locale('fa');
+                    output = m.format('ddd') + ' ' + m.format("YYYY/MM/DD") + " \n" + m.format("MMMM");
+                } else {
+                    output = "it is not a valid date";
+                }
+            } catch (e) {
+                output = "input is not a date";
+            }
+            document.getElementById("jalaliOutput").innerText = output;
+        })
+
+
+
+        document.getElementById("convertToGregorian").addEventListener("click", function () {
+            var output = "";
+            try {
+                var input = document.getElementById("jalaliInput").value;
+                var m = moment.from(input, 'fa', 'YYYY/MM/DD');
+
+                if (m.isValid()) {
+                    output = m.format(  'dddd') + ' ' + m.locale('en').format('YYYY/MM/DD') + "\n" + m.format(
+                        "MMMM");
+                } else {
+                    output = "input is not a jalali date"
+                }
+            } catch (e) {
+                output = "input is not a date";
+            }
+            document.getElementById("gregorianOutput").innerText = output
+        })
+    </script>
+</body>
+
+</html>
